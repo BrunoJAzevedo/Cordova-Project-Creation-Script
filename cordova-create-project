@@ -1,0 +1,42 @@
+#!/bin/bash
+echo Automate creation? [Y/n]
+read varname
+
+if [ $varname == "YES" ] || [ $varname == "Y" ] || [ $varname == "yes" ] || [ $varname == "y" ] ; then
+    cordova create cordovaproj com.example.cordova.proj cordovaproj
+    cd cordovaproj
+    echo Add iOS? [Y/n]
+    read installIos
+    if [ $installIos == "YES" ] || [ $installIos == "Y" ] || [ $installIos == "yes" ] || [ $installIos == "y" ] ; then
+    cordova platform add ios
+    fi
+
+    echo Add Android? [Y/n]
+    read installAndroid
+    if [ $installAndroid == "YES" ] || [ $installAndroid == "Y" ] || [ $installAndroid == "yes" ] || [ $installAndroid == "y" ] ; then
+    cordova platform add android
+    fi
+    
+else
+    echo Enter path name
+    read folderName
+    echo Enter ID
+    read ID
+    echo Enter name [Suggest same has path]
+    read name
+    cordova create $folderName $ID $name
+    cd $folderName
+
+    echo Add iOS? [Y/n]
+    read installIos
+
+    if [ $installIos == "YES" ] || [ $installIos == "Y" ] || [ $installIos == "yes" ] || [ $installIos == "y" ] ; then
+    cordova platform add ios
+    fi
+
+    echo Add Android? [Y/n]
+    read installAndroid
+    if [ $installAndroid == "YES" ] || [ $installAndroid == "Y" ] || [ $installAndroid == "yes" ] || [ $installAndroid == "y" ] ; then
+    cordova platform add android
+    fi
+fi
