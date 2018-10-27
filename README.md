@@ -1,6 +1,6 @@
 # Cordova-Project-Creation-Script
 
-Tired on having to do several commands everytime you want to create a cordova project? This script helps you automate this process.
+Tired of having to do several commands every time you want to create a cordova project? This script helps you automate this process.
 
 ## Suggested installation
 
@@ -15,21 +15,20 @@ mkdir bin
 
 ### Bash
 
-Add to _.bash_profile_ which will be located at _~/.bash_profile_. If does not exist create _.bash_profile_.
+Add to _.bash_profile_ which will be located at _~/.bash_profile_. If does not exist create _.bash_profile_:
 
 `export PATH=$PATH:/Users/{whoami}/bin`
 
 ### Zsh
 
-Add to _.zshrc_
+Add to _.zshrc_:
 
-`export SCRIPTS_PATH=/Users/$(whoami)/bin`
-`export PATH=$SCRIPTS_PATH:$PATH`
+`export PATH=$PATH:/Users/{whoami}/bin`
 
 ---
 
-In _bin_ directory add the file _cordova-create-project_. 
-In the same bin directory make the _cordova_create_project_ an executable file 
+In _bin_ directory add the _cordova-create-project_ file. 
+In the same bin directory make the _cordova_create_project_ an executable file: 
 
 ```bash
 chmod u+x cordova_create_project
@@ -37,4 +36,4 @@ chmod u+x cordova_create_project
 
 Now anywhere run `cordova-create-project` and follow the instructions
 
-And Tadaa you have an script to create your cordova project
+And Tadaa you have an easier way to create your cordova project
