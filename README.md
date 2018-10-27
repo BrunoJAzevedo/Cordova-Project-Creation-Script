@@ -28,10 +28,10 @@ Add to _.zshrc_:
 ---
 
 In _bin_ directory add the _cordova-create-project_ file. 
-In the same bin directory make the _cordova_create_project_ an executable file: 
+In the same bin directory make the _cordova-create-project_ an executable file: 
 
 ```bash
-chmod u+x cordova_create_project
+chmod u+x cordova-create-project
 ```
 
 Now anywhere run `cordova-create-project` and follow the instructions
