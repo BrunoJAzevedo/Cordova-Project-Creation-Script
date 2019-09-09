@@ -1,42 +1,72 @@
 #!/bin/bash
-echo Automate creation? [Y/n]
-read varname
+androidVersion="6.4.0"
+iosVersion="4.5.5"
+defaultProject="com.outsystems.experts"
 
-if [ $varname == "YES" ] || [ $varname == "Y" ] || [ $varname == "yes" ] || [ $varname == "y" ] ; then
-    cordova create cordovaproj com.example.cordova.proj cordovaproj
-    cd cordovaproj
-    echo Add iOS? [Y/n]
-    read installIos
-    if [ $installIos == "YES" ] || [ $installIos == "Y" ] || [ $installIos == "yes" ] || [ $installIos == "y" ] ; then
-    cordova platform add ios
+
+varname="Y"
+if [[ ${1} == "" ]] ; then
+    echo Automate creation? [Y/n]
+    read varname
+fi
+
+if [[ ${varname} == "YES" ]] || [[ ${varname} == "Y" ]] || [[ ${varname} == "yes" ]] || [[ ${varname} == "y" ]] ; then
+    projectName=${1}
+    if [[ ${1} == "" ]] ; then
+        echo Enter Project Name
+        read projectName
+    fi
+    cordova create ${projectName} ${defaultProject}.${projectName} ${projectName}
+    cd ${projectName}
+
+    askPlatform=false
+    if [[ ${2} == "" ]] ; then
+        askPlatform=true
     fi
 
-    echo Add Android? [Y/n]
-    read installAndroid
-    if [ $installAndroid == "YES" ] || [ $installAndroid == "Y" ] || [ $installAndroid == "yes" ] || [ $installAndroid == "y" ] ; then
-    cordova platform add android
+    if [[ ${2} == "ios" ]] || [[ ${3} == "ios" ]]; then
+        cordova platform add ios@${iosVersion}
+    else
+        if [[ $askPlatform == true ]]; then
+            askAddIos
+        fi
     fi
-    
+
+    if [[ ${2} == "android" ]] || [[ ${3} == "android" ]] ; then
+            cordova platform add android@${androidVersion}
+    else
+        if [[ $askPlatform == true ]]; then
+            askAddAndroid
+        fi
+    fi
+
 else
     echo Enter path name
     read folderName
     echo Enter ID
     read ID
-    echo Enter name [Suggest same has path]
-    read name
-    cordova create $folderName $ID $name
-    cd $folderName
+    cordova create ${folderName} ${ID} ${folderName}
+    cd ${folderName}
 
+    askAddIos
+
+    askAddAndroid
+
+fi
+
+
+askAddIos () {
     echo Add iOS? [Y/n]
     read installIos
-
-    if [ $installIos == "YES" ] || [ $installIos == "Y" ] || [ $installIos == "yes" ] || [ $installIos == "y" ] ; then
-    cordova platform add ios
+    if [[ ${installIos} == "YES" ]] || [[ ${installIos} == "Y" ]] || [[ ${installIos} == "yes" ]] || [[ ${installIos} == "y" ]] ; then
+        cordova platform add ios@$iosVersion
     fi
+}
 
+askAddAndroid () {
     echo Add Android? [Y/n]
     read installAndroid
-    if [ $installAndroid == "YES" ] || [ $installAndroid == "Y" ] || [ $installAndroid == "yes" ] || [ $installAndroid == "y" ] ; then
-    cordova platform add android
+    if [[ ${installAndroid} == "YES" ]] || [[ ${installAndroid} == "Y" ]] || [[ ${installAndroid} == "yes" ]] || [[ ${installAndroid} == "y" ]] ; then
+        cordova platform add android@${androidVersion}
     fi
-fi
+}
